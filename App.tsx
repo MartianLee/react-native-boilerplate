@@ -4,8 +4,6 @@ import {
   PaperProvider,
   Text,
 } from 'react-native-paper';
-import App from './src/Home';
-import NewCard from './src/components/NewCard';
 import {
   Image,
   ScrollView,
@@ -20,6 +18,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useEffect} from 'react';
 import remoteConfig from '@react-native-firebase/remote-config';
+import HomeScreen from './src/screen/Home';
+import WritePostScreen from './src/screen/WritePost';
 
 const theme = {
   ...DefaultTheme,
@@ -29,24 +29,6 @@ const theme = {
     secondary: 'yellow',
   },
 };
-
-function HomeScreen() {
-  return (
-    <SafeAreaView>
-      <ScrollView style={styles.sectionContainer}>
-        <Text variant="displayLarge">Home</Text>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => (
-          <NewCard key={i} />
-        ))}
-      </ScrollView>
-      <TouchableOpacity
-        onPress={() => console.log('Pressed!')}
-        style={styles.writeButton}>
-        <Text variant="headlineSmall">Write</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
-  );
-}
 
 function OtherScreen() {
   return (
@@ -139,6 +121,11 @@ export default function Main() {
             component={BottomTabNavigator}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="WritePost"
+            component={WritePostScreen}
+            options={{headerShown: true}}
+          />
           {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
         </Stack.Navigator>
         {/* <Stack.Navigator>
@@ -151,21 +138,3 @@ export default function Main() {
     </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 16,
-    paddingHorizontal: 16,
-  },
-  writeButton: {
-    position: 'absolute',
-    backgroundColor: 'tomato',
-    borderRadius: 30,
-    width: 100,
-    right: 20,
-    bottom: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-  },
-});
