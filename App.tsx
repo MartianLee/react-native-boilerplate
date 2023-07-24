@@ -18,6 +18,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useEffect} from 'react';
+import remoteConfig from '@react-native-firebase/remote-config';
 
 const theme = {
   ...DefaultTheme,
@@ -107,6 +109,27 @@ const BottomTabNavigator = () => {
 };
 
 export default function Main() {
+  useEffect(() => {
+    const loadRemoteConfig = async () => {
+      const res = await remoteConfig().fetchAndActivate();
+      // remoteConfig().setConfigSettings({
+      //   minimumFetchIntervalMillis: 0,
+      // });
+      console.log(res);
+      const parameters = remoteConfig().getAll();
+      // console.log(parameters);
+      // const p2 = remoteConfig().getValue('test');
+      // console.log(p2);
+      Object.entries(parameters).forEach($ => {
+        const [key, entry] = $;
+        console.log('Key: ', key);
+        console.log('Source: ', entry.getSource());
+        console.log('Value: ', entry.asString());
+      });
+    };
+    loadRemoteConfig();
+  }, []);
+
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
