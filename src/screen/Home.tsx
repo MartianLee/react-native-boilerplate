@@ -3,6 +3,7 @@ import {MD3LightTheme as DefaultTheme, Text} from 'react-native-paper';
 import {ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import NewCard from '../components/NewCard';
+import {Camera, useCameraDevices} from 'react-native-vision-camera';
 
 type HomeScreenProps = {
   navigation: any;

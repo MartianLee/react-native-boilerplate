@@ -51,5 +51,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>모여서넷제로 인증을 위해 사진 권한이 필요합니다</string>
 </dict>
 </plist>
